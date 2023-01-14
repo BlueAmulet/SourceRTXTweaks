@@ -56,7 +56,7 @@ This exists inside Source Engine already, but Portal with RTX extended it to als
 This fixes light leaks when a wall is not facing the camera.
 
 <details>  
-<summary>Technical info</summary>
+<summary>Technical info [World backfaces]</summary>
 
 This one is hard to explain, apologies in advance.  
 Search for "r_frustumcullworld" and go to the function referencing this string.  
@@ -78,9 +78,19 @@ Inside the second loop is a check against `< -0.01f or -0.0099999998f`, this is 
 
 </details>
 
+<details>  
+<summary>Technical info [Brush entity backfaces]</summary>
+
+Search for "Refusing to render the map on an entity to prevent crashes!" and go to the function referencing this string.  
+Later in the function is a check against `< -0.01f or -0.0099999998f`, this is a backface check, skip this check.
+
+</details>
+
 **engine.dll:**  
 EFD36: Change `7E` to `EB`  
 EFDD3: Change `75` to `EB`
+
+ECC45: Change `75` to `EB`
 
 ## Crashes
 
