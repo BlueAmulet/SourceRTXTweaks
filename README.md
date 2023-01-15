@@ -6,7 +6,15 @@ DISCLAIMER: Garry's Mod is a VAC protected game. By using these patches, you acc
 
 Now that that's out of the way, a BPS patch is provided to apply the following patches to your game. I recommend the use of [Floating IPS](https://www.romhacking.net/utilities/1040/) to perform the patching, as it is lightweight, simple, and straightforward to use. These patches are built against Build ID 8912316, June 10, 2022. All technical info statements below are in the context of a disassembler such as IDA Pro or Ghidra.
 
-## c_frustumcull
+## Contents
+
+[Patches](https://github.com/BlueAmulet/GModRTXTweaks#patches)  
+[Crash Fixes](https://github.com/BlueAmulet/GModRTXTweaks#crashes)  
+[Recommendations](https://github.com/BlueAmulet/GModRTXTweaks#recommendations)
+
+## Patches
+
+### c_frustumcull
 
 Portal with RTX added in c_frustumcull, which prevents objects out of view from being skipped.  
 This primarily fixes missing shadows, though technically it is also a light leak.
@@ -32,7 +40,7 @@ retn
 **client.dll:**  
 361C00: Change `55 8B EC` to `32 C0 C3`
 
-## r_forcenovis
+### r_forcenovis
 
 Also new to Portal with RTX is r_forcenovis, which disables the BSP level visibility checks. (guessing, unsure)  
 This fixes some light leaking issues.
@@ -50,7 +58,7 @@ Change this to 1.
 **client.dll:**  
 254522: Change `00` to `01`
 
-## r_frustumcullworld
+### r_frustumcullworld
 
 This exists inside Source Engine already, but Portal with RTX extended it to also disable various backface culling checks.  
 This fixes light leaks when a wall is not facing the camera.
@@ -115,4 +123,23 @@ mov    al,0x4
 </details>
 
 **shaderapidx9:**  
-35020: Change `83 C4 10 8B E5 5D C3 CC CC CC` to `85 C0 75 02 B0 04 8B E5 5D C3`  
+35020: Change `83 C4 10 8B E5 5D C3 CC CC CC` to `85 C0 75 02 B0 04 8B E5 5D C3`
+
+### gm_construct, gm_flatgrass, and other shader based skybox maps crash on load
+
+Go inside `garrysmod\bin` and rename `game_shader_generic_garrysmod.dll` to something else.  
+This will remove shaders for shader based skyboxes, and post processing effects which aren't used with RTX Remix anyway.  
+Note: While the maps will load now, they still lack a skybox and may or may not have a functioning sun.
+
+## Recommendations
+
+Part of the process to using RTX Remix with GMod is to replace the menu files with ones from [here](https://github.com/robotboy655/gmod-lua-menu)  
+If you removed the `include( "loading.lua" )` line from `garrysmod\lua\menu\menu.lua`, then also go into `garrysmod\lua\menu\background.lua` and make the following change:  
+```  
+local function ShouldBackgroundUpdate()
+
+	return false
+
+end  
+```  
+This will prevent an endless spam of script errors.
