@@ -1,18 +1,23 @@
-# GMod RTX Tweaks
+# RTX Remix patches for Source Engine games
 
-This is a set of tweaks for Garry's Mod to work better with RTX Remix, fixing missing shadows, light leaks, and crashes.
+This is a set of unofficial patches and recommendations for various Source Engine based games, to improve lighting and reduce crashes when using RTX Remix.  
+DLL Offsets are provided for use with a hex editor, and BPS patches are provided to apply all changes easily at once. I recommend the use of [Floating IPS](https://www.romhacking.net/utilities/1040/) to perform the patching, as it is lightweight, simple, and straightforward to use.
 
-DISCLAIMER: Garry's Mod is a VAC protected game. By using these patches, you accept that I am not responsible for any issues or damages resulting from the use of these patches. Do not use Garry's Mod in VAC protected servers while using RTX Remix, these patches, or any other modification.
+Disclaimer: Some of the games listed below make use of Valve Anti-Cheat. By using these patches, you accept that I am not responsible for any issues or damages resulting from the use of these patches. Do not use those games in VAC protected servers while using RTX Remix, these patches, or any other modification.
 
-Now that that's out of the way, a BPS patch is provided to apply the following patches to your game. I recommend the use of [Floating IPS](https://www.romhacking.net/utilities/1040/) to perform the patching, as it is lightweight, simple, and straightforward to use. These patches are built against Build ID 8912316, June 10, 2022. All technical info statements below are in the context of a disassembler such as IDA Pro or Ghidra.
+## Games
 
-## Contents
+[Garry's Mod](https://github.com/BlueAmulet/SourceRTXTweaks/tree/main/garrysmod)  
+[Half Life 2](https://github.com/BlueAmulet/SourceRTXTweaks/tree/main/hl2)
 
-[Patches](https://github.com/BlueAmulet/GModRTXTweaks#patches)  
-[Crash Fixes](https://github.com/BlueAmulet/GModRTXTweaks#crashes)  
-[Recommendations](https://github.com/BlueAmulet/GModRTXTweaks#recommendations)
+## Recommendations
 
-## Patches
+The following launch options should be beneficial to all Source Engine based games:
+
+## Technical Info
+
+This is to help with finding the relevant code again incase a game receives and update.  
+All technical info statements below are in the context of a disassembler such as IDA Pro or Ghidra.
 
 ### c_frustumcull
 
@@ -33,13 +38,6 @@ retn
 
 </details>
 
-**engine.dll:**  
-244FC0: Change `55 8B EC` to `32 C0 C3`  
-245050: Change `55 8B EC` to `32 C0 C3`
-
-**client.dll:**  
-361C00: Change `55 8B EC` to `32 C0 C3`
-
 ### r_forcenovis
 
 Also new to Portal with RTX is r_forcenovis, which disables the BSP level visibility checks. (guessing, unsure)  
@@ -50,13 +48,19 @@ This fixes some light leaking issues.
 
 Search for "CViewRender::Render" and go to the function referencing this string.  
 Near the top of this function, there should be a byte sized `this` member being set to 0:  
-`*(byte*)(this + 844) = 0;`  
-Change this to 1.
+`*(byte*)(this + 844) = 0;` or `this[844] = 0;`  
+The number may not be 844. Change this to 1.
+
+If the code is optimized to make sure of a register known to be zero to assign the value:  
+With a debugger such as [x64dbg](https://x64dbg.com/), set a break point on this instruction.  
+Check the address listed and set a hardware byte read breakpoint on it.  
+This should get you the function that reads this member, change it to the following instructions:  
+```  
+mov    al,0x1  
+retn  
+```
 
 </details>
-
-**client.dll:**  
-254522: Change `00` to `01`
 
 ### r_frustumcullworld
 
@@ -89,57 +93,11 @@ Inside the second loop is a check against `< -0.01f or -0.0099999998f`, this is 
 <details>  
 <summary>Technical info [Brush entity backfaces]</summary>
 
-Search for "Refusing to render the map on an entity to prevent crashes!" and go to the function referencing this string.  
-Later in the function is a check against `< -0.01f or -0.0099999998f`, this is a backface check, skip this check.
+For Garry's Mod:  
+	Search for "Refusing to render the map on an entity to prevent crashes!" and go to the function referencing this string.  
+For other games:  
+	Check for references on the -0.01f float found above, and goto the nearest function.  
+	This function should also contain references to the "$AlphaTestReference" string  
+Find the check against `< -0.01f or -0.0099999998f`, this is a backface check, skip this check.
 
-</details>
-
-**engine.dll:**  
-EFD36: Change `7E` to `EB`  
-EFDD3: Change `75` to `EB`
-
-ECC45: Change `75` to `EB`
-
-## Crashes
-
-### failed to lock vertex buffer in CMeshDX8::LockVertexBuffer
-
-Credits to [@khang06](https://github.com/khang06) for this fix, found [here](https://github.com/khang06/misc/tree/master/reversing/source/portalrtxvbfix)
-
-<details>  
-<summary>Technical info</summary>
-
-Search for "CMeshMgr::FindOrCreateVertexBuffer (dynamic VB)" and go to the function referencing this string.  
-At the top of the function should be a function call taking two arguments, go inside this function.  
-This function should consist of a single call followed by a value return:  
-`function_call(0, a1, a2, v3);`  
-After the function call and eax has been loaded, add in the following instructions:  
-```  
-test   eax,eax  
-jne    +0x2  
-mov    al,0x4  
-```
-
-</details>
-
-**shaderapidx9:**  
-35020: Change `83 C4 10 8B E5 5D C3 CC CC CC` to `85 C0 75 02 B0 04 8B E5 5D C3`
-
-### gm_construct, gm_flatgrass, and other shader based skybox maps crash on load
-
-Go inside `garrysmod\bin` and rename `game_shader_generic_garrysmod.dll` to something else.  
-This will remove shaders for shader based skyboxes, and post processing effects which aren't used with RTX Remix anyway.  
-Note: While the maps will load now, they still lack a skybox and may or may not have a functioning sun.
-
-## Recommendations
-
-Part of the process to using RTX Remix with GMod is to replace the menu files with ones from [here](https://github.com/robotboy655/gmod-lua-menu)  
-If you removed the `include( "loading.lua" )` line from `garrysmod\lua\menu\menu.lua`, then also go into `garrysmod\lua\menu\background.lua` and make the following change:  
-```  
-local function ShouldBackgroundUpdate()
-
-	return false
-
-end  
-```  
-This will prevent an endless spam of script errors.
+</details>  
