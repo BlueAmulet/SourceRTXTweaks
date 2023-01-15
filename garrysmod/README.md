@@ -38,27 +38,12 @@ ECC45: Change `75` to `EB`
 
 ## Crashes
 
-### failed to lock vertex buffer in CMeshDX8::LockVertexBuffer
+### failed to lock vertex buffer in CMeshDX8::LockVertexBuffer  
+### integer division by zero
 
 Credits to [@khang06](https://github.com/khang06) for this fix, found [here](https://github.com/khang06/misc/tree/master/reversing/source/portalrtxvbfix)
 
-<details>  
-<summary>Technical info</summary>
-
-Search for "CMeshMgr::FindOrCreateVertexBuffer (dynamic VB)" and go to the function referencing this string.  
-At the top of the function should be a function call taking two arguments, go inside this function.  
-This function should consist of a single call followed by a value return:  
-`function_call(0, a1, a2, v3);`  
-After the function call and eax has been loaded, add in the following instructions:  
-```  
-test   eax,eax  
-jne    +0x2  
-mov    al,0x4  
-```
-
-</details>
-
-**shaderapidx9:**  
+**shaderapidx9.dll:**  
 35020: Change `83 C4 10 8B E5 5D C3 CC CC CC` to `85 C0 75 02 B0 04 8B E5 5D C3`
 
 ### gm_construct, gm_flatgrass, and other shader based skybox maps crash on load

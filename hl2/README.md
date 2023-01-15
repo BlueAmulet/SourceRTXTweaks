@@ -7,6 +7,7 @@ BPS patches are provided to apply the following patches to your game. I recommen
 ## Contents
 
 [Patches](https://github.com/BlueAmulet/SourceRTXTweaks/tree/main/hl2#patches)
+[Crash Fixes](https://github.com/BlueAmulet/SourceRTXTweaks/tree/main/hl2#crashes)
 
 ## Patches
 
@@ -37,3 +38,13 @@ FD5F3: Change `7E` to `EB`
 FD685: Change `75` to `EB`
 
 FAD4D: Change `75` to `EB`  
+
+## Crashes
+
+### Game crashes on launch  
+### integer division by zero
+
+Credits to [@khang06](https://github.com/khang06) for this fix, found [here](https://github.com/khang06/misc/tree/master/reversing/source/portalrtxvbfix)
+
+**shaderapidx9.dll:**  
+353D0: Change `83 C4 10 8B E5 5D C3 CC CC CC` to `85 C0 75 02 B0 04 8B E5 5D C3`

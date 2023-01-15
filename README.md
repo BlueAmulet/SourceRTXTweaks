@@ -101,3 +101,24 @@ For other games:
 Find the check against `< -0.01f or -0.0099999998f`, this is a backface check, skip this check.
 
 </details>  
+
+### failed to lock vertex buffer in CMeshDX8::LockVertexBuffer  
+### integer division by zero
+
+Credits to [@khang06](https://github.com/khang06) for this fix, found [here](https://github.com/khang06/misc/tree/master/reversing/source/portalrtxvbfix)
+
+<details>  
+<summary>Technical info</summary>
+
+Search for "CMeshMgr::FindOrCreateVertexBuffer (dynamic VB)" and go to the function referencing this string.  
+At the top of the function should be a function call taking two arguments, go inside this function.  
+This function should consist of a single call followed by a value return:  
+`function_call(0, a1, a2, v3);`  
+After the function call and eax has been loaded, add in the following instructions:  
+```  
+test   eax,eax  
+jne    +0x2  
+mov    al,0x4  
+```
+
+</details>
