@@ -27,7 +27,7 @@ This primarily fixes missing shadows, though technically it is also a light leak
 <details>  
 <summary>Technical info</summary>
 
-Search for the following set of bytes in engine.dll or client.dll: `83 C4 0C 83 F8 02 74`  
+In engine.dll or client.dll, search for the following set of bytes: `83 C4 0C 83 F8 02 74`  
 There should be several hits in 2 functions within engine.dll, and 1 function within client.dll.  
 Replace the start of the functions with the following bytes: `32 C0 C3`  
 This is equal to the following instructions:  
@@ -46,7 +46,7 @@ This fixes some light leaking issues.
 <details>  
 <summary>Technical info</summary>
 
-Search for "CViewRender::Render" and go to the function referencing this string.  
+In client.dll, search for "CViewRender::Render" and go to the function referencing this string.  
 Near the top of this function, there should be a byte sized `this` member being set to 0:  
 `*(byte*)(this + 844) = 0;` or `this[844] = 0;`  
 The number may not be 844. Change this to 1.
@@ -71,7 +71,7 @@ This fixes light leaks when a wall is not facing the camera.
 <summary>Technical info [World backfaces]</summary>
 
 This one is hard to explain, apologies in advance.  
-Search for "r_frustumcullworld" and go to the function referencing this string.  
+In engine.dll, search for "r_frustumcullworld" and go to the function referencing this string.  
 There should be a function call with parameters (byte, "r_frustumcullworld", "1", 0)  
 If using IDA Pro and the byte variable is missing, decompile the inner function and then refresh the first function.  
 Go to the byte variable and skip ahead 0x1C, the dword variable here is the actual variable for r_frustumcullworld.  
@@ -94,10 +94,10 @@ Inside the second loop is a check against `< -0.01f or -0.0099999998f`, this is 
 <summary>Technical info [Brush entity backfaces]</summary>
 
 For Garry's Mod:  
-	Search for "Refusing to render the map on an entity to prevent crashes!" and go to the function referencing this string.  
+    Search for "Refusing to render the map on an entity to prevent crashes!" and go to the function referencing this string.  
 For other games:  
-	Check for references on the -0.01f float found above, and goto the nearest function.  
-	This function should also contain references to the "$AlphaTestReference" string  
+    Check for references on the -0.01f float found above, and goto the nearest function.  
+    This function should also contain references to the "$AlphaTestReference" string  
 Find the check against `< -0.01f or -0.0099999998f`, this is a backface check, skip this check.
 
 </details>  

@@ -4,7 +4,7 @@ This is a set of unofficial patches for Garry's Mod to work better with RTX Remi
 
 DISCLAIMER: Garry's Mod is a VAC protected game. By using these patches, you accept that I am not responsible for any issues or damages resulting from the use of these patches. Do not use Garry's Mod in VAC protected servers while using RTX Remix, these patches, or any other modification.
 
-Now that that's out of the way, BPS patches are provided to apply the following patches to your game. I recommend the use of [Floating IPS](https://www.romhacking.net/utilities/1040/) to perform the patching, as it is lightweight, simple, and straightforward to use. These patches are built against Build ID 8912316, June 10, 2022. All technical info statements below are in the context of a disassembler such as IDA Pro or Ghidra.
+Now that that's out of the way, BPS patches are provided to apply the following patches to your game. I recommend the use of [Floating IPS](https://www.romhacking.net/utilities/1040/) to perform the patching, as it is lightweight, simple, and straightforward to use. These patches are built against Build ID 10410112, January 26, 2023. All technical info statements below are in the context of a disassembler such as IDA Pro or Ghidra.
 
 ## Contents
 
@@ -17,24 +17,24 @@ Now that that's out of the way, BPS patches are provided to apply the following 
 ### c_frustumcull
 
 **engine.dll:**  
-244FC0: Change `55 8B EC` to `32 C0 C3`  
-245050: Change `55 8B EC` to `32 C0 C3`
+251AB0: Change `55 8B EC` to `32 C0 C3`  
+251B40: Change `55 8B EC` to `32 C0 C3`
 
 **client.dll:**  
-361C00: Change `55 8B EC` to `32 C0 C3`
+3753C0: Change `55 8B EC` to `32 C0 C3`
 
 ### r_forcenovis
 
 **client.dll:**  
-254522: Change `00` to `01`
+298C12: Change `00` to `01`
 
 ### r_frustumcullworld
 
 **engine.dll:**  
-EFD36: Change `7E` to `EB`  
-EFDD3: Change `75` to `EB`
+F4626: Change `7E` to `EB`  
+F46C3: Change `75` to `EB`
 
-ECC45: Change `75` to `EB`
+F1345: Change `75` to `EB`
 
 ## Crashes
 
@@ -44,7 +44,7 @@ ECC45: Change `75` to `EB`
 Credits to [@khang06](https://github.com/khang06) for this fix, found [here](https://github.com/khang06/misc/tree/master/reversing/source/portalrtxvbfix)
 
 **shaderapidx9.dll:**  
-35020: Change `83 C4 10 8B E5 5D C3 CC CC CC` to `85 C0 75 02 B0 04 8B E5 5D C3`
+350D0: Change `83 C4 10 8B E5 5D C3 CC CC CC` to `85 C0 75 02 B0 04 8B E5 5D C3`
 
 ### gm_construct, gm_flatgrass, and other shader based skybox maps crash on load
 
