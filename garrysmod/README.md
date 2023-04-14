@@ -4,7 +4,7 @@ This is a set of unofficial patches for Garry's Mod to work better with RTX Remi
 
 DISCLAIMER: Garry's Mod is a VAC protected game. By using these patches, you accept that I am not responsible for any issues or damages resulting from the use of these patches. Do not use Garry's Mod in VAC protected servers while using RTX Remix, these patches, or any other modification.
 
-Now that that's out of the way, BPS patches are provided to apply the following patches to your game. I recommend the use of [Floating IPS](https://www.romhacking.net/utilities/1040/) to perform the patching, as it is lightweight, simple, and straightforward to use. These patches are built against Build ID 10410112, January 26, 2023. All technical info statements below are in the context of a disassembler such as IDA Pro or Ghidra.
+Now that that's out of the way, BPS patches are provided to apply the following patches to your game. I recommend the use of [Floating IPS](https://www.romhacking.net/utilities/1040/) to perform the patching, as it is lightweight, simple, and straightforward to use. These patches are built against Build ID 10525565, February 10, 2023. All technical info statements below are in the context of a disassembler such as IDA Pro or Ghidra.
 
 ## Contents
 
@@ -21,7 +21,7 @@ Now that that's out of the way, BPS patches are provided to apply the following 
 251B40: Change `55 8B EC` to `32 C0 C3`
 
 **client.dll:**  
-3753C0: Change `55 8B EC` to `32 C0 C3`
+3753F0: Change `55 8B EC` to `32 C0 C3`
 
 ### r_forcenovis
 

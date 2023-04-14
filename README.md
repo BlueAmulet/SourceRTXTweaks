@@ -51,7 +51,7 @@ Near the top of this function, there should be a byte sized `this` member being 
 `*(byte*)(this + 844) = 0;` or `this[844] = 0;`  
 The number may not be 844. Change this to 1.
 
-If the code is optimized to make sure of a register known to be zero to assign the value:  
+If the code is optimized to make use of a register known to be zero to assign the value:  
 With a debugger such as [x64dbg](https://x64dbg.com/), set a break point on this instruction.  
 Check the address listed and set a hardware byte read breakpoint on it.  
 This should get you the function that reads this member, change it to the following instructions:  
