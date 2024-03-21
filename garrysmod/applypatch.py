@@ -14,7 +14,7 @@ patches32 = {
     ['75438b4604', 'eb'], # world backfaces
 ],
 'bin/materialsystem.dll': [
-    ['558bec83ec7c57', '31c0c3'], # no shader loading
+    ['558bec81ec0c02', 'c3'], # no shader loading
 ],
 'bin/shaderapidx9.dll': [
     ['0f4cd68bf7', '909090'], # four hardware lights
@@ -35,7 +35,7 @@ patches64 = {
     ['753c498b4204', 'eb'], # world backfaces
 ],
 'bin/win64/materialsystem.dll': [
-    ['40554155', '31c0c3'], # no shader loading
+    ['48895c24185557', 'c3'], # no shader loading
 ],
 'bin/win64/shaderapidx9.dll': [
     ['480f4ec1c7', '90909090'], # four hardware lights
