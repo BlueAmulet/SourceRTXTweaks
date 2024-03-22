@@ -3,29 +3,26 @@ import os
 
 patches32 = {
 'garrysmod/bin/client.dll': [
-    ['558bec538b5d08568b7510578b', '32c0c3'], # c_frustumcull
+    ['558bec538b5d08568b7510578b', '31c0c3'], # c_frustumcull
     ['00e8????efff8b0d??????10??????????????????????????ff', '01'], # r_forcenovis
 ],
 'bin/engine.dll': [
-    ['558bec538b5d08568b7510578b7d0c565753e8????ffff83c40c83f8027466', '32c0c3'], # c_frustumcull
-    ['558bec538b5d08568b7510578b7d0c565753e8??ddffff83c40c83f8027453', '32c0c3'], # c_frustumcull
+    ['558bec538b5d08568b7510578b7d0c565753e8????ffff83c40c83f8027466', '31c0c3'], # c_frustumcull
+    ['558bec538b5d08568b7510578b7d0c565753e8??ddffff83c40c83f8027453', '31c0c3'], # c_frustumcull
     ['7530f30f10', 'eb'], # brush entity backfaces
     ['7e3ceb06', 'eb'], # world backfaces
     ['75438b4604', 'eb'], # world backfaces
 ],
-'bin/materialsystem.dll': [
-    ['558bec81ec0c02', 'c3'], # no shader loading
-],
 'bin/shaderapidx9.dll': [
     ['0f4cd68bf7', '909090'], # four hardware lights
     ['83c4108be55dc3cccccccccccccccccc55', '85c07502b0048be55dc3'], # zero sized buffer
-    ['558bec51a140200e10538b5d', 'c3'] # vertex shader constants
+    ['558bec8b451053568b750833', '31c0c3'] # shader constants
 ],
 }
 
 patches64 = {
 'bin/win64/client.dll': [
-    ['4883ec480f1022', '32c0c3'], # c_frustumcull
+    ['4883ec480f1022', '31c0c3'], # c_frustumcull
     ['0fb68154', 'b001c3'], # r_forcenovis [getter]
 ],
 'bin/win64/engine.dll': [
@@ -34,13 +31,10 @@ patches64 = {
     ['7e5244', 'eb'], # world backfaces
     ['753c498b4204', 'eb'], # world backfaces
 ],
-'bin/win64/materialsystem.dll': [
-    ['48895c24185557', 'c3'], # no shader loading
-],
 'bin/win64/shaderapidx9.dll': [
     ['480f4ec1c7', '90909090'], # four hardware lights
     ['4833cce804c5', '85c0750466b80400'], # zero sized buffer
-    ['48895c240848896c24104889742418574883ec20488b05', 'c3'] # vertex shader constants
+    ['4883ec084c', '31c0c3'] # shader constants
 ],
 }
 
