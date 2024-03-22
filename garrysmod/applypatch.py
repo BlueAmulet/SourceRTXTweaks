@@ -33,7 +33,7 @@ patches64 = {
 ],
 'bin/win64/shaderapidx9.dll': [
     ['480f4ec1c7', '90909090'], # four hardware lights
-    ['4833cce804c5', '85c0750466b80400'], # zero sized buffer
+    ['4833cce8??c503004881c448', '85c0750466b80400'], # zero sized buffer
     ['4883ec084c', '31c0c3'] # shader constants
 ],
 }
