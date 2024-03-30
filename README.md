@@ -1,14 +1,12 @@
 # RTX Remix patches for Source Engine games
 
 This is a set of unofficial patches and recommendations for various Source Engine based games, to improve lighting and reduce crashes when using RTX Remix.  
-DLL Offsets are provided for use with a hex editor, and BPS patches are provided to apply all changes easily at once. I recommend the use of [Floating IPS](https://www.romhacking.net/utilities/1040/) to perform the patching, as it is lightweight, simple, and straightforward to use.
+**Disclaimer:** Source Engine games may make use of Valve Anti-Cheat. By using these patches, you accept that I am not responsible for any issues or damages resulting from the use of these patches. Do not use those games in VAC protected servers while using RTX Remix, these patches, or any other modification. To protect yourself from accidentally joining a VAC protected server, run games with the `-insecure` launch option.  
+Now that that's out of the way, a python script called `applypatch.py` has been provided to hopefully automatically apply the patches to your game. Place `applypatch.py` inside of your game folder and run it. Patched DLLs will appear within a "patched" directory, copy these over the original.
 
-Disclaimer: Some of the games listed below make use of Valve Anti-Cheat. By using these patches, you accept that I am not responsible for any issues or damages resulting from the use of these patches. Do not use those games in VAC protected servers while using RTX Remix, these patches, or any other modification.
-
-## Games
+## Specific games
 
 [Garry's Mod](https://github.com/BlueAmulet/SourceRTXTweaks/tree/main/garrysmod)  
-[Half Life 2](https://github.com/BlueAmulet/SourceRTXTweaks/tree/main/hl2)
 
 ## Recommendations
 
@@ -29,7 +27,7 @@ This primarily fixes missing shadows, though technically it is also a light leak
 
 In engine.dll or client.dll, search for the following set of bytes: `83 C4 0C 83 F8 02 74`  
 There should be several hits in 2 functions within engine.dll, and 1 function within client.dll.  
-Replace the start of the functions with the following bytes: `32 C0 C3`  
+Replace the start of the functions with the following bytes: `31 C0 C3`  
 This is equal to the following instructions:  
 ```  
 xor al, al  
