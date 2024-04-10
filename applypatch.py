@@ -25,7 +25,10 @@ patches32 = {
         ('8a81??030000c3cccccccccccccccccc8b', 0), # m_bForceNoVis [getter]
         ('cccccccccccccccccc8a814403', 9) # m_bForceNoVis [alt getter]
         ], 'b001c3'],
-]
+],
+'bin/datacache.dll': [
+    [('647838302e767478', 0), '647839302e767478'], # force load dx9 vtx
+],
 }
 
 # Incomplete Garry's Mod 64bit patches
