@@ -14,6 +14,13 @@ patches32 = {
     [('b80000000f4c', 4), '909090'], # four hardware lights
     [('9483c410', 1), '85c07502b0048be55dc3'], # zero sized buffer
     [('558bec8b451053568b750833', 0), '31c0c3'], # shader constants
+    [('c7461400000100c74610008000', 0), 'c7461400000200c74610000001'], # INDEX_BUFFER_SIZE, CMeshMgr::CMeshMgr
+    [('b800800000c3', 0), 'b8000001'], # INDEX_BUFFER_SIZE, CMeshMgr::GetMaxIndicesToRender
+    [('5068008000008bce', 0), '5068000001'] # INDEX_BUFFER_SIZE, CMeshMgr::Init
+],
+'bin/materialsystem.dll': [
+    [('b800800000c3', 0), 'b8000001'], # INDEX_BUFFER_SIZE, CMatQueuedRenderContext::GetMaxIndicesToRender
+    [('c701ffff0000c700008000', 0), 'c701ffff0000c700000001'] # INDEX_BUFFER_SIZE, CMatQueuedRenderContext::GetMaxToRender
 ],
 'bin/client.dll': [
     [('558bec538b5d08568b7510578b', 0), '31c0c3'], # c_frustumcull
