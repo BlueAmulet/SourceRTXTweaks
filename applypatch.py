@@ -12,7 +12,7 @@ patches32 = {
 ],
 'bin/shaderapidx9.dll': [
     [('b80000000f4c', 4), '909090'], # four hardware lights
-    [('9483c410', 1), '85c07502b0048be55dc3'], # zero sized buffer
+    [('9483c4108be55dc3cccccc', 1), '85c07502b0048be55dc3'], # zero sized buffer
     [('558bec8b451053568b750833', 0), '31c0c3'], # shader constants
 ],
 'bin/client.dll': [
@@ -28,6 +28,9 @@ patches32 = {
 ],
 'bin/datacache.dll': [
     [('647838302e767478', 0), '647839302e767478'], # force load dx9 vtx
+],
+'bin/materialsystem.dll': [
+    [('f77d945f3bc15e0f4fc18be55dc20400cccccccccccc', 0), '8b7d9485ff7402f7ff5f39c85e0f4fc189ec5dc20400'], # zero sized buffer protection
 ],
 }
 
