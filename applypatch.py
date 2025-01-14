@@ -44,13 +44,16 @@ patches64 = {
 ],
 'bin/win64/shaderapidx9.dll': [
     [('480f4ec1c7', 0), '90909090'], # four hardware lights
-    [('4833cce8??c503004881c448', 0), '85c0750466b80400'], # zero sized buffer
+    [('4833cce8????03004881c448', 0), '85c0750466b80400'], # zero sized buffer
     [('4883ec084c', 0), '31c0c3'] # shader constants
 ],
 'bin/win64/client.dll': [
     [('4883ec480f1022', 0), '31c0c3'], # c_frustumcull
     [('0fb68154', 0), 'b001c3'], # r_forcenovis [getter]
-]
+],
+'bin/win64/materialsystem.dll': [
+    [('f77c24683bc10f4fc1488b8c24300100004833cce8??bb04004881c448010000', 0), '448b4424684585c0740341f7f839c80f4fc14881c448010000c3'], # zero sized buffer protection
+],
 }
 
 # Colored log output
