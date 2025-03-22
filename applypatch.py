@@ -37,7 +37,7 @@ patches32 = {
 # Incomplete Garry's Mod 64bit patches
 patches64 = {
 'bin/win64/engine.dll': [
-    # TODO: Missing c_frustumcull patches
+    [('4883ec480f10', 0), '31c0c3'], #c_frustumcull patches
     [('753cf30f10', 0), 'eb'], # brush entity backfaces
     [('7e5244', 0), 'eb'], # world backfaces
     [('753c498b4204', 0), 'eb'], # world backfaces
