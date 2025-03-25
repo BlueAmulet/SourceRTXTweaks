@@ -54,6 +54,9 @@ patches64 = {
 'bin/win64/materialsystem.dll': [
     [('f77c24683bc10f4fc1488b8c24300100004833cce8????04004881c448010000', 0), '448b4424684585c0740341f7f839c80f4fc14881c448010000c3'], # zero sized buffer protection
 ],
+'bin/win64/datacache.dll': [
+    [('647838302e767478', 0), '647839302e767478'], # force load dx9 vtx
+],
 }
 
 # Colored log output
